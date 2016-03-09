@@ -4,9 +4,15 @@
 
 $color-background:          #002235;
 $color-background-env:      #002a42;
-$color-text:                #7dc3e8;
-$color-yellow:              #f9d67a;
-$color-yellow-dark:         #eba800;
+$color-text:                #7cdbf3;
+$color-yellow:              #f0ab00;
+$color-yellow-dark:         #b58100;
+$color-red:                 #a30000;
+$color-red-dark:            #8b0000;
+$color-blue:                #00b9e4;
+$color-blue-dark:           #008bad;
+$color-green:               #92d400;
+$color-green-dark:          #2d7623;
 $font-weight-light:         300;
 $font-weight-normal:        400;
 $font-weight-bold:          600;
@@ -23,7 +29,8 @@ body{
   font-weight: $font-weight-normal;
   font-size: $font-size-base;
   padding: 8px;
-  height: calc(100% - 32px);
+  margin: 0;
+  height: calc(100% - 16px);
 }
 
 .environment{
@@ -41,7 +48,7 @@ body{
   }
   h2{
     margin: 0;
-    font-size: $font-size-base + 2;
+    font-size: $font-size-base;
     font-weight: normal;
     text-transform: uppercase;
   }
@@ -53,6 +60,52 @@ body{
   }
 }
 
+@keyframes breathe{
+  to{
+    box-shadow: 0 0 100px #ff7777;
+  }
+}
+
+
+.planet{
+  transform: rotate(-.25turn) scale(.4);
+  background: $color-yellow-dark;
+  border-radius: 50%;
+  border: 6px solid $color-yellow;
+  circle{
+    // We can add this as attributes on the svg if needed
+    stroke: $color-yellow;
+    stroke-width:32;
+    stroke-dasharray: 0 100;
+    fill:none;
+    animation: circle-rotation 3s linear infinite;
+  }
+  &.planet-red{
+    background: $color-red-dark;
+    border-color: $color-red-dark;
+    box-shadow: 0 0 0px red;
+    animation: breathe 1s ease-in-out alternate infinite;
+    circle{
+      stroke: $color-red;
+    }
+  }
+  &.planet-blue{
+    background: $color-blue;
+    border-color: $color-blue-dark;
+    circle{
+      stroke: $color-blue-dark;
+    }
+  }
+  &.planet-green{
+    background: $color-green;
+    border-color: $color-green-dark;
+    circle{
+      stroke: $color-green-dark;
+    }
+  }
+}
+
+/*
 @keyframes circle-rotation-stroke{
   to{
     stroke-dasharray: 100 100;
@@ -65,6 +118,7 @@ body{
     filter: saturate(1);
   }
 }
+
 
 .planet{
   transform: rotate(-.25turn) scale(.6);
@@ -95,19 +149,7 @@ body{
   }
 }
 
-.planet3{
-  transform: rotate(-.25turn) scale(.4);
-  background: $color-yellow;
-  border-radius: 50%;
-  border: 6px solid $color-yellow-dark;
-  circle{
-    stroke: $color-yellow-dark;
-    stroke-width:32;
-    stroke-dasharray: 0 100;
-    fill:none;
-    animation: circle-rotation 3s linear infinite;
-  }
-}
+
 
 .planet4{
   transform: rotate(-.25turn) scale(.6);
@@ -119,3 +161,4 @@ body{
     animation: circle-rotation-stroke 5s linear infinite;
   }
 }
+*/

@@ -4,12 +4,13 @@ html {
 
 body {
   background: #002235;
-  color: #7dc3e8;
+  color: #7cdbf3;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 14px;
   padding: 8px;
-  height: calc(100% - 32px); }
+  margin: 0;
+  height: calc(100% - 16px); }
 
 .environment {
   background: #002a42;
@@ -25,7 +26,7 @@ body {
     width: calc(100% - 44px); }
   .environment h2 {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     text-transform: uppercase; }
 
@@ -37,78 +38,100 @@ body {
   to {
     stroke-dasharray: 100 100; } }
 
-@-webkit-keyframes circle-rotation-stroke {
+@-webkit-keyframes breathe {
   to {
-    stroke-dasharray: 100 100;
-    stroke-width: 10; } }
+    box-shadow: 0 0 100px #ff7777; } }
 
-@keyframes circle-rotation-stroke {
+@keyframes breathe {
   to {
-    stroke-dasharray: 100 100;
-    stroke-width: 10; } }
-
-@-webkit-keyframes color-change {
-  to {
-    -webkit-filter: saturate(1);
-            filter: saturate(1); } }
-
-@keyframes color-change {
-  to {
-    -webkit-filter: saturate(1);
-            filter: saturate(1); } }
+    box-shadow: 0 0 100px #ff7777; } }
 
 .planet {
-  -webkit-transform: rotate(-0.25turn) scale(0.6);
-          transform: rotate(-0.25turn) scale(0.6); }
+  -webkit-transform: rotate(-0.25turn) scale(0.4);
+          transform: rotate(-0.25turn) scale(0.4);
+  background: #b58100;
+  border-radius: 50%;
+  border: 6px solid #f0ab00; }
   .planet circle {
-    stroke: #eba800;
-    stroke-width: 5;
-    stroke-dasharray: 0 100;
-    fill: #f9d67a;
-    -webkit-animation: circle-rotation 5s linear infinite;
-            animation: circle-rotation 5s linear infinite; }
-
-.planet2 {
-  -webkit-transform: rotate(-0.25turn) scale(0.4);
-          transform: rotate(-0.25turn) scale(0.4);
-  background: #f9d67a;
-  border-radius: 50%;
-  border: 5px solid #eba800;
-  -webkit-filter: saturate(0);
-          filter: saturate(0);
-  -webkit-animation: color-change 3s linear infinite;
-          animation: color-change 3s linear infinite;
-  -webkit-animation-delay: 3s;
-          animation-delay: 3s; }
-  .planet2 circle {
-    stroke: #eba800;
+    stroke: #f0ab00;
     stroke-width: 32;
     stroke-dasharray: 0 100;
     fill: none;
     -webkit-animation: circle-rotation 3s linear infinite;
             animation: circle-rotation 3s linear infinite; }
+  .planet.planet-red {
+    background: #8b0000;
+    border-color: #8b0000;
+    box-shadow: 0 0 0px red;
+    -webkit-animation: breathe 1s ease-in-out alternate infinite;
+            animation: breathe 1s ease-in-out alternate infinite; }
+    .planet.planet-red circle {
+      stroke: #a30000; }
+  .planet.planet-blue {
+    background: #00b9e4;
+    border-color: #008bad; }
+    .planet.planet-blue circle {
+      stroke: #008bad; }
+  .planet.planet-green {
+    background: #92d400;
+    border-color: #2d7623; }
+    .planet.planet-green circle {
+      stroke: #2d7623; }
 
-.planet3 {
-  -webkit-transform: rotate(-0.25turn) scale(0.4);
-          transform: rotate(-0.25turn) scale(0.4);
-  background: #f9d67a;
+/*
+@keyframes circle-rotation-stroke{
+  to{
+    stroke-dasharray: 100 100;
+        stroke-width: 10;
+  }
+}
+
+@keyframes color-change{
+  to{
+    filter: saturate(1);
+  }
+}
+
+
+.planet{
+  transform: rotate(-.25turn) scale(.6);
+  circle{
+    stroke: $color-yellow-dark;
+    stroke-width:5;
+    stroke-dasharray: 0 100;
+    fill:$color-yellow;
+    animation: circle-rotation 5s linear infinite;
+  }
+}
+
+
+.planet2{
+  transform: rotate(-.25turn) scale(.4);
+  background: $color-yellow;
   border-radius: 50%;
-  border: 6px solid #eba800; }
-  .planet3 circle {
-    stroke: #eba800;
-    stroke-width: 32;
+  border: 5px solid $color-yellow-dark;
+  filter: saturate(0);
+  animation: color-change 3s linear infinite;
+  animation-delay: 3s;
+  circle{
+    stroke: $color-yellow-dark;
+    stroke-width:32;
     stroke-dasharray: 0 100;
-    fill: none;
-    -webkit-animation: circle-rotation 3s linear infinite;
-            animation: circle-rotation 3s linear infinite; }
+    fill:none;
+    animation: circle-rotation 3s linear infinite;
+  }
+}
 
-.planet4 {
-  -webkit-transform: rotate(-0.25turn) scale(0.6);
-          transform: rotate(-0.25turn) scale(0.6); }
-  .planet4 circle {
-    stroke: #eba800;
-    stroke-width: 1;
+
+
+.planet4{
+  transform: rotate(-.25turn) scale(.6);
+  circle{
+    stroke: $color-yellow-dark;
+    stroke-width:1;
     stroke-dasharray: 0 100;
-    fill: #f9d67a;
-    -webkit-animation: circle-rotation-stroke 5s linear infinite;
-            animation: circle-rotation-stroke 5s linear infinite; }
+    fill:$color-yellow;
+    animation: circle-rotation-stroke 5s linear infinite;
+  }
+}
+*/
