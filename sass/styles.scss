@@ -23,7 +23,7 @@ body{
   font-weight: $font-weight-normal;
   font-size: $font-size-base;
   padding: 8px;
-  height: calc(100% - 16px);
+  height: calc(100% - 32px);
 }
 
 .environment{
@@ -49,11 +49,17 @@ body{
 
 
 
-@keyframes foo{
+@keyframes circle-rotation{
   to{
     stroke-dasharray: 100 100;
   }
 }
+@keyframes color-change{
+  to{
+    filter: saturate(1);
+  }
+}
+
 .planet{
   transform: rotate(-.25turn) scale(.6);
   circle{
@@ -61,6 +67,24 @@ body{
     stroke-width:5;
     stroke-dasharray: 0 100;
     fill:$color-yellow;
-    animation: foo 5s linear infinite;
+    animation: circle-rotation 5s linear infinite;
+  }
+}
+
+
+.planet2{
+  transform: rotate(-.25turn) scale(.5);
+  background: $color-yellow;
+  border-radius: 50%;
+  border: 5px solid $color-yellow-dark;
+  filter: saturate(0);
+  animation: color-change 3s linear infinite;
+  animation-delay: 3s;
+  circle{
+    stroke: $color-yellow-dark;
+    stroke-width:32;
+    stroke-dasharray: 0 100;
+    fill:none;
+    animation: circle-rotation 3s linear infinite;
   }
 }
