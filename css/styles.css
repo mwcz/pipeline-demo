@@ -38,13 +38,21 @@ body {
   to {
     stroke-dasharray: 100 100; } }
 
-@-webkit-keyframes breathe {
+@-webkit-keyframes pulse-red {
   to {
     box-shadow: 0 0 100px #ff7777; } }
 
-@keyframes breathe {
+@keyframes pulse-red {
   to {
     box-shadow: 0 0 100px #ff7777; } }
+
+@-webkit-keyframes pulse-star {
+  to {
+    box-shadow: 0px 0 35px #fff; } }
+
+@keyframes pulse-star {
+  to {
+    box-shadow: 0px 0 35px #fff; } }
 
 .planet {
   -webkit-transform: rotate(-0.25turn) scale(0.4);
@@ -63,8 +71,8 @@ body {
     background: #8b0000;
     border-color: #8b0000;
     box-shadow: 0 0 0px red;
-    -webkit-animation: breathe 1s ease-in-out alternate infinite;
-            animation: breathe 1s ease-in-out alternate infinite; }
+    -webkit-animation: pulse-red 1s ease-in-out alternate infinite;
+            animation: pulse-red 1s ease-in-out alternate infinite; }
     .planet.planet-red circle {
       stroke: #a30000; }
   .planet.planet-blue {
@@ -77,6 +85,16 @@ body {
     border-color: #92d400; }
     .planet.planet-green circle {
       stroke: #92d400; }
+
+.star {
+  background: #bde4f5;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  width: 8px;
+  height: 8px;
+  -webkit-animation: pulse-star 2s ease alternate infinite;
+          animation: pulse-star 2s ease alternate infinite;
+  margin: 20px; }
 
 /*
 @keyframes circle-rotation-stroke{
