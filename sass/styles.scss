@@ -5,6 +5,8 @@
 $color-background:          #002235;
 $color-background-env:      #002a42;
 $color-text:                #7dc3e8;
+$color-yellow:              #f9d67a;
+$color-yellow-dark:         #eba800;
 $font-weight-light:         300;
 $font-weight-normal:        400;
 $font-weight-bold:          600;
@@ -26,7 +28,6 @@ body{
 
 .environment{
   background: $color-background-env;
-//  background: pink;
   border-radius: 2px;
   float: left;
   margin: 0 2px 4px 2px;
@@ -44,4 +45,37 @@ body{
     font-weight: normal;
     text-transform: uppercase;
   }
+}
+
+
+.ball{
+  background: $color-yellow-dark;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  &:before{
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top:10px;
+    left: 10px;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,.1));
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: $color-yellow;
+  }
+}
+
+
+.planet{
+}
+
+.planet-core{
+  fill: $color-yellow;
+}
+.planet-loader{
+  fill: $color-yellow-dark;
 }
