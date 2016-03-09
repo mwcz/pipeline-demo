@@ -48,11 +48,15 @@ body {
 
 @-webkit-keyframes pulse-star {
   to {
-    box-shadow: 0px 0 35px #fff; } }
+    box-shadow: 0px 0 35px #fff;
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1); } }
 
 @keyframes pulse-star {
   to {
-    box-shadow: 0px 0 35px #fff; } }
+    box-shadow: 0px 0 35px #fff;
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1); } }
 
 .planet {
   -webkit-transform: rotate(-0.25turn) scale(0.4);
@@ -94,7 +98,9 @@ body {
   height: 8px;
   -webkit-animation: pulse-star 2s ease alternate infinite;
           animation: pulse-star 2s ease alternate infinite;
-  margin: 20px; }
+  margin: 20px;
+  -webkit-transform: scale3d(0.9, 0.9, 0.9);
+          transform: scale3d(0.9, 0.9, 0.9); }
 
 /*
 @keyframes circle-rotation-stroke{
