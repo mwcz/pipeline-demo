@@ -29,28 +29,21 @@ body {
     font-weight: normal;
     text-transform: uppercase; }
 
-.ball {
-  background: #eba800;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  position: relative;
-  z-index: 1; }
-  .ball:before {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    top: 10px;
-    left: 10px;
-    -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    background: #f9d67a; }
+@-webkit-keyframes foo {
+  to {
+    stroke-dasharray: 100 100; } }
 
-.planet-core {
-  fill: #f9d67a; }
+@keyframes foo {
+  to {
+    stroke-dasharray: 100 100; } }
 
-.planet-loader {
-  fill: #eba800; }
+.planet {
+  -webkit-transform: rotate(-0.25turn) scale(0.6);
+          transform: rotate(-0.25turn) scale(0.6); }
+  .planet circle {
+    stroke: #eba800;
+    stroke-width: 5;
+    stroke-dasharray: 0 100;
+    fill: #f9d67a;
+    -webkit-animation: foo 5s linear infinite;
+            animation: foo 5s linear infinite; }
