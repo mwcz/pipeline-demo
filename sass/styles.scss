@@ -54,10 +54,17 @@ body{
     stroke-dasharray: 100 100;
   }
 }
+
+@keyframes circle-rotation-stroke{
+  to{
+    stroke-dasharray: 100 100;
+        stroke-width: 10;
+  }
+}
+
 @keyframes color-change{
   to{
     filter: saturate(1);
-    transform: rotate(-.25turn) scale(.6);
   }
 }
 
@@ -91,17 +98,26 @@ body{
 }
 
 .planet3{
-  transform: rotate(-.25turn) scale(.3);
+  transform: rotate(-.25turn) scale(.4);
+  background: $color-yellow;
   border-radius: 50%;
-//  border: 5px solid $color-yellow-dark;
-  filter: saturate(0);
-  animation: color-change 3s linear infinite;
-  animation-delay: 3s;
+  border: 6px solid $color-yellow-dark;
   circle{
     stroke: $color-yellow-dark;
-    stroke-width:5;
+    stroke-width:32;
     stroke-dasharray: 0 100;
-    fill: $color-yellow;
+    fill:none;
     animation: circle-rotation 3s linear infinite;
+  }
+}
+
+.planet4{
+  transform: rotate(-.25turn) scale(.6);
+  circle{
+    stroke: $color-yellow-dark;
+    stroke-width:1;
+    stroke-dasharray: 0 100;
+    fill:$color-yellow;
+    animation: circle-rotation-stroke 5s linear infinite;
   }
 }

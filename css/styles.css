@@ -37,19 +37,25 @@ body {
   to {
     stroke-dasharray: 100 100; } }
 
+@-webkit-keyframes circle-rotation-stroke {
+  to {
+    stroke-dasharray: 100 100;
+    stroke-width: 10; } }
+
+@keyframes circle-rotation-stroke {
+  to {
+    stroke-dasharray: 100 100;
+    stroke-width: 10; } }
+
 @-webkit-keyframes color-change {
   to {
     -webkit-filter: saturate(1);
-            filter: saturate(1);
-    -webkit-transform: rotate(-0.25turn) scale(0.6);
-            transform: rotate(-0.25turn) scale(0.6); } }
+            filter: saturate(1); } }
 
 @keyframes color-change {
   to {
     -webkit-filter: saturate(1);
-            filter: saturate(1);
-    -webkit-transform: rotate(-0.25turn) scale(0.6);
-            transform: rotate(-0.25turn) scale(0.6); } }
+            filter: saturate(1); } }
 
 .planet {
   -webkit-transform: rotate(-0.25turn) scale(0.6);
@@ -83,19 +89,26 @@ body {
             animation: circle-rotation 3s linear infinite; }
 
 .planet3 {
-  -webkit-transform: rotate(-0.25turn) scale(0.3);
-          transform: rotate(-0.25turn) scale(0.3);
+  -webkit-transform: rotate(-0.25turn) scale(0.4);
+          transform: rotate(-0.25turn) scale(0.4);
+  background: #f9d67a;
   border-radius: 50%;
-  -webkit-filter: saturate(0);
-          filter: saturate(0);
-  -webkit-animation: color-change 3s linear infinite;
-          animation: color-change 3s linear infinite;
-  -webkit-animation-delay: 3s;
-          animation-delay: 3s; }
+  border: 6px solid #eba800; }
   .planet3 circle {
     stroke: #eba800;
-    stroke-width: 5;
+    stroke-width: 32;
     stroke-dasharray: 0 100;
-    fill: #f9d67a;
+    fill: none;
     -webkit-animation: circle-rotation 3s linear infinite;
             animation: circle-rotation 3s linear infinite; }
+
+.planet4 {
+  -webkit-transform: rotate(-0.25turn) scale(0.6);
+          transform: rotate(-0.25turn) scale(0.6); }
+  .planet4 circle {
+    stroke: #eba800;
+    stroke-width: 1;
+    stroke-dasharray: 0 100;
+    fill: #f9d67a;
+    -webkit-animation: circle-rotation-stroke 5s linear infinite;
+            animation: circle-rotation-stroke 5s linear infinite; }
