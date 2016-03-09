@@ -57,6 +57,7 @@ body{
 @keyframes color-change{
   to{
     filter: saturate(1);
+    transform: rotate(-.25turn) scale(.6);
   }
 }
 
@@ -73,7 +74,7 @@ body{
 
 
 .planet2{
-  transform: rotate(-.25turn) scale(.5);
+  transform: rotate(-.25turn) scale(.4);
   background: $color-yellow;
   border-radius: 50%;
   border: 5px solid $color-yellow-dark;
@@ -90,7 +91,7 @@ body{
 }
 
 .planet3{
-  transform: rotate(-.25turn) scale(.7);
+  transform: rotate(-.25turn) scale(.3);
   border-radius: 50%;
 //  border: 5px solid $color-yellow-dark;
   filter: saturate(0);
