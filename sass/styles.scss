@@ -90,17 +90,17 @@ body{
     }
   }
   &.planet-blue{
-    background: $color-blue;
-    border-color: $color-blue-dark;
+    background: $color-blue-dark;
+    border-color: $color-blue;
     circle{
-      stroke: $color-blue-dark;
+      stroke: $color-blue;
     }
   }
   &.planet-green{
-    background: $color-green;
-    border-color: $color-green-dark;
+    background: $color-green-dark;
+    border-color: $color-green;
     circle{
-      stroke: $color-green-dark;
+      stroke: $color-green;
     }
   }
 }

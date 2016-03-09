@@ -68,15 +68,15 @@ body {
     .planet.planet-red circle {
       stroke: #a30000; }
   .planet.planet-blue {
-    background: #00b9e4;
-    border-color: #008bad; }
+    background: #008bad;
+    border-color: #00b9e4; }
     .planet.planet-blue circle {
-      stroke: #008bad; }
+      stroke: #00b9e4; }
   .planet.planet-green {
-    background: #92d400;
-    border-color: #2d7623; }
+    background: #2d7623;
+    border-color: #92d400; }
     .planet.planet-green circle {
-      stroke: #2d7623; }
+      stroke: #92d400; }
 
 /*
 @keyframes circle-rotation-stroke{
