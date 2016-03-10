@@ -61,11 +61,11 @@ body {
 .planet {
   -webkit-transform: rotate(-0.25turn) scale(0.4);
           transform: rotate(-0.25turn) scale(0.4);
-  background: #b58100;
+  background: #005c66;
   border-radius: 50%;
-  border: 6px solid #f0ab00; }
+  border: 8px solid #7dbdc3; }
   .planet circle {
-    stroke: #f0ab00;
+    stroke: #7dbdc3;
     stroke-width: 32;
     stroke-dasharray: 0 100;
     fill: none;
@@ -79,6 +79,11 @@ body {
             animation: pulse-red 1s ease-in-out alternate infinite; }
     .planet.planet-red circle {
       stroke: #ce0000; }
+  .planet.planet-yellow {
+    background: #b58100;
+    border-color: #f0ab00; }
+    .planet.planet-yellow circle {
+      stroke: #f0ab00; }
   .planet.planet-blue {
     background: #008bad;
     border-color: #00b9e4; }

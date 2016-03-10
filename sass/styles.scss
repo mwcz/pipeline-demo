@@ -5,6 +5,12 @@
 $color-background:          #002235;
 $color-background-env:      #002a42;
 $color-text:                #7cdbf3;
+$color-teal:                #7dbdc3;
+$color-teal-dark:           #005c66;
+$color-violet:              #a18fff;
+$color-violet-dark:         #582fc0;
+$color-orange:              #f7bd7f;
+$color-orange-dark:         #b35c00;
 $color-yellow:              #f0ab00;
 $color-yellow-dark:         #b58100;
 $color-red:                 #ce0000;
@@ -76,12 +82,12 @@ body{
 
 .planet{
   transform: rotate(-.25turn) scale(.4);
-  background: $color-yellow-dark;
+  background: $color-teal-dark;
   border-radius: 50%;
-  border: 6px solid $color-yellow;
+  border: 8px solid $color-teal;
   circle{
     // We can add this as attributes on the svg if needed
-    stroke: $color-yellow;
+    stroke: $color-teal;
     stroke-width:32;
     stroke-dasharray: 0 100;
     fill:none;
@@ -94,6 +100,13 @@ body{
     animation: pulse-red 1s ease-in-out alternate infinite;
     circle{
       stroke: $color-red;
+    }
+  }
+  &.planet-yellow{
+    background: $color-yellow-dark;
+    border-color: $color-yellow;
+    circle{
+      stroke: $color-yellow;
     }
   }
   &.planet-blue{
