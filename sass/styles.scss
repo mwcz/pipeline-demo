@@ -35,13 +35,18 @@ body{
   font-family: 'Open Sans', sans-serif;
   font-weight: $font-weight-normal;
   font-size: $font-size-base;
-  margin-top: 40px;
 //  padding: 8px;
 //  margin: 0;
 //  height: calc(100% - 16px);
 }
 
-
+.container{
+  overflow: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
 // Microservice ==============
 
 .microservice{
@@ -66,10 +71,14 @@ body{
   background: $color-background-env; //$color-background-env;
   border-radius: 4px;
   float: left;
-  margin: 40px 10px 0px 10px;
-  width: calc(33.3% - 20px);
+  margin: 40px 10px 10px 10px;
   height: 50px;
   position: relative;
+
+  .two-stages &{      width: calc(50% - 20px);  }
+  .three-stages &{    width: calc(33.3% - 20px);}
+  .four-stages &{     width: calc(25% - 20px);}
+
   &:after{
     content: "";
     background-color: $color-background-env;
