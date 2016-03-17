@@ -8,38 +8,71 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 12px;
-  margin: 0; }
+  margin: 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
 
 .container {
-  overflow: auto;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  width: calc(100%); }
+  width: 100%; }
 
 .microservice {
+  cursor: pointer;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+  -webkit-transform-origin: left 50%;
+          transform-origin: left 50%;
   width: 60%;
-  clear: both;
-  background: tan;
-  position: relative; }
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .microservice:hover {
+    -webkit-transform: scale3d(1.15, 1.15, 1.15);
+            transform: scale3d(1.15, 1.15, 1.15);
+    -webkit-filter: drop-shadow(0 0 10px #00b9e4);
+            filter: drop-shadow(0 0 10px #00b9e4);
+    z-index: 10; }
+  .microservice h1 {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 25px;
+    color: #fff;
+    font-weight: 600; }
 
 .stages {
-  width: 80%; }
+  width: 80%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
 
 .stage {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 10%;
+      -ms-flex: 1 0 10%;
+          flex: 1 0 10%;
   background: #002a42;
-  border-radius: 4px;
-  float: left;
-  margin: 40px 10px 10px 10px;
+  border-radius: 2px;
+  margin: 0px 10px 10px 10px;
   height: 50px;
   position: relative; }
-  .two-stages .stage {
-    width: calc(50% - 20px); }
-  .three-stages .stage {
-    width: calc(33.3% - 20px); }
-  .four-stages .stage {
-    width: calc(25% - 20px); }
   .stage:after {
     content: "";
     background-color: #002a42;
@@ -53,7 +86,6 @@ body {
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%); }
   .stage.stage-lg {
-    width: calc(20% - 10px);
     margin-right: 0;
     margin-top: 0;
     height: 130px; }
@@ -62,7 +94,7 @@ body {
   .stage h2 {
     margin: 0;
     line-height: 25px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: normal;
     text-transform: uppercase;
     position: absolute;
@@ -70,22 +102,52 @@ body {
 
 @-webkit-keyframes move {
   to {
-    -webkit-transform: translateY(-50%) translateX(140%);
-            transform: translateY(-50%) translateX(140%); } }
+    -webkit-transform: translateY(-50%) translateX(-1500%);
+            transform: translateY(-50%) translateX(-1500%); } }
 
 @keyframes move {
   to {
-    -webkit-transform: translateY(-50%) translateX(140%);
-            transform: translateY(-50%) translateX(140%); } }
+    -webkit-transform: translateY(-50%) translateX(-1500%);
+            transform: translateY(-50%) translateX(-1500%); } }
+
+@-webkit-keyframes pulse-red {
+  to {
+    box-shadow: 0 0 10px #00b9e4; } }
+
+@keyframes pulse-red {
+  to {
+    box-shadow: 0 0 10px #00b9e4; } }
 
 .commit {
-  background: #a18fff;
-  width: 40px;
-  height: 40px;
+  background-color: #a18fff;
+  border: 2px solid #582fc0;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%) translateX(-1700%);
-          transform: translateY(-50%) translateX(-1700%);
-  -webkit-animation: move 9s ease;
-          animation: move 9s ease; }
+  -webkit-transform: translateY(-50%) translateX(55px);
+          transform: translateY(-50%) translateX(55px); }
+  .animate .commit {
+    -webkit-animation: move 9s ease infinite;
+            animation: move 9s ease infinite;
+    -webkit-animation-direction: reverse;
+            animation-direction: reverse; }
+  .commit.commit-blue {
+    background-color: #00b9e4;
+    border-color: #008bad;
+    -webkit-transform: translateY(10px) translateX(55px);
+            transform: translateY(10px) translateX(55px); }
+  .commit.commit-green {
+    background-color: #92d400;
+    border-color: #2d7623;
+    -webkit-transform: translateY(-50px) translateX(55px);
+            transform: translateY(-50px) translateX(55px); }
+  .commit.commit-yellow {
+    background-color: #f0ab00;
+    border-color: #b58100; }
+  .commit.commit-red {
+    background-color: #ce0000;
+    border-color: #8b0000;
+    -webkit-animation: pulse-red 1s ease-in-out alternate infinite;
+            animation: pulse-red 1s ease-in-out alternate infinite; }
