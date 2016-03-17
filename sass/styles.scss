@@ -36,7 +36,7 @@ body{
   font-weight: $font-weight-normal;
   font-size: $font-size-base;
 //  padding: 8px;
-//  margin: 0;
+  margin: 0;
 //  height: calc(100% - 16px);
 }
 
@@ -45,7 +45,7 @@ body{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 100%;
+  width: calc(100%);
 }
 // Microservice ==============
 
