@@ -7,50 +7,28 @@ body {
   color: #7cdbf3;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 12px;
-  margin-top: 40px; }
-
-.pipeline {
-  width: 60%;
-  overflow: auto;
-  margin-bottom: 20px; }
+  font-size: 14px;
+  padding: 8px;
+  margin: 0;
+  height: calc(100% - 16px); }
 
 .environment {
   background: #002a42;
-  border-radius: 4px;
+  border-radius: 2px;
   float: left;
-  margin: 0 10px;
-  padding: 10px;
-  width: calc(25% - 40px);
-  height: 80px;
-  position: relative; }
-  .environment:after {
-    content: "";
-    background-color: #002a42;
-    -webkit-mask-image: url(https://dl.dropboxusercontent.com/u/4371641/link.svg);
-            mask-image: url(https://dl.dropboxusercontent.com/u/4371641/link.svg);
-    width: 20px;
-    height: 26px;
-    position: absolute;
-    right: -20px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%); }
+  margin: 0 2px 4px 2px;
+  padding: 20px;
+  width: calc(25% - 44px);
+  height: calc(45% - 44px); }
   .environment.environment-lg {
-    margin-bottom: 0px; }
-    .environment.environment-lg:after {
-      display: none; }
+    margin-bottom: 0px;
+    height: calc(55% - 44px);
+    width: calc(100% - 44px); }
   .environment h2 {
-    margin: 0 0 10px 0;
-    font-size: 12px;
+    margin: 0;
+    font-size: 14px;
     font-weight: normal;
     text-transform: uppercase; }
-
-.microservice {
-  background: #a18fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; }
 
 @-webkit-keyframes circle-rotation {
   to {

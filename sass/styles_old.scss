@@ -22,7 +22,7 @@ $color-green-dark:          #2d7623;
 $font-weight-light:         300;
 $font-weight-normal:        400;
 $font-weight-bold:          600;
-$font-size-base:            12px;
+$font-size-base:            14px;
 $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 html{
@@ -35,70 +35,34 @@ body{
   font-family: 'Open Sans', sans-serif;
   font-weight: $font-weight-normal;
   font-size: $font-size-base;
-  margin-top: 40px;
-//  padding: 8px;
-//  margin: 0;
-//  height: calc(100% - 16px);
+  padding: 8px;
+  margin: 0;
+  height: calc(100% - 16px);
 }
 
-
-// Microservice ==============
-
-.pipeline{
-  width: 60%;
-  overflow: auto; // clearfix
-  margin-bottom: 20px;
-}
 
 // Environment ==============
-
 .environment{
-  background: $color-background-env; //$color-background-env;
-  border-radius: 4px;
+  background: $color-background-env;
+  border-radius: 2px;
   float: left;
-  margin: 0 10px;
-  padding: 10px;
-  width: calc(25% - 40px);
-  height: 80px;
-  position: relative;
-//  padding: 20px;
-//  width: calc(25% - 44px);
-//  height: calc(45% - 44px);
-  &:after{
-    content: "";
-    background-color: $color-background-env;
-    mask-image: url(https://dl.dropboxusercontent.com/u/4371641/link.svg);
-    width: 20px;
-    height: 26px;
-    position: absolute;
-    right: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  margin: 0 2px 4px 2px;
+  padding: 20px;
+  width: calc(25% - 44px);
+  height: calc(45% - 44px);
   &.environment-lg{
     margin-bottom: 0px;
-    //    height: calc(55% - 44px);
-    //    width: calc(100% - 44px);
-    &:after{
-      display: none;
-    }
+    height: calc(55% - 44px);
+    width: calc(100% - 44px);
   }
   h2{
-    margin: 0 0 10px 0;
+    margin: 0;
     font-size: $font-size-base;
     font-weight: normal;
     text-transform: uppercase;
   }
 }
 
-// Microservice ==============
-
-.microservice{
-  background: $color-violet;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
 
 // Planets ==============
 
