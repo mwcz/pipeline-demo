@@ -10,21 +10,24 @@ body {
   font-size: 12px;
   margin-top: 40px; }
 
-.pipeline {
+.microservice {
   width: 60%;
-  overflow: auto;
-  margin-bottom: 20px; }
+  clear: both;
+  background: tan;
+  position: relative; }
 
-.environment {
+.stages {
+  width: 80%; }
+
+.stage {
   background: #002a42;
   border-radius: 4px;
   float: left;
-  margin: 0 10px;
-  padding: 10px;
-  width: calc(25% - 40px);
-  height: 80px;
+  margin: 40px 10px 0px 10px;
+  width: calc(33.3% - 20px);
+  height: 50px;
   position: relative; }
-  .environment:after {
+  .stage:after {
     content: "";
     background-color: #002a42;
     -webkit-mask-image: url(https://dl.dropboxusercontent.com/u/4371641/link.svg);
@@ -36,97 +39,40 @@ body {
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%); }
-  .environment.environment-lg {
-    margin-bottom: 0px; }
-    .environment.environment-lg:after {
+  .stage.stage-lg {
+    width: calc(20% - 10px);
+    margin-right: 0;
+    margin-top: 0;
+    height: 130px; }
+    .stage.stage-lg:after {
       display: none; }
-  .environment h2 {
-    margin: 0 0 10px 0;
+  .stage h2 {
+    margin: 0;
+    line-height: 25px;
     font-size: 12px;
     font-weight: normal;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    position: absolute;
+    bottom: -25px; }
 
-.microservice {
+@-webkit-keyframes move {
+  to {
+    -webkit-transform: translateY(-50%) translateX(140%);
+            transform: translateY(-50%) translateX(140%); } }
+
+@keyframes move {
+  to {
+    -webkit-transform: translateY(-50%) translateX(140%);
+            transform: translateY(-50%) translateX(140%); } }
+
+.commit {
   background: #a18fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; }
-
-@-webkit-keyframes circle-rotation {
-  to {
-    stroke-dasharray: 100 100; } }
-
-@keyframes circle-rotation {
-  to {
-    stroke-dasharray: 100 100; } }
-
-@-webkit-keyframes pulse-red {
-  to {
-    box-shadow: 0 0 100px #00b9e4; } }
-
-@keyframes pulse-red {
-  to {
-    box-shadow: 0 0 100px #00b9e4; } }
-
-.planet {
-  -webkit-transform: rotate(-0.25turn) scale(0.4);
-          transform: rotate(-0.25turn) scale(0.4);
-  background: #005c66;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 8px solid #7dbdc3; }
-  .planet circle {
-    stroke: #7dbdc3;
-    stroke-width: 32;
-    stroke-dasharray: 0 100;
-    fill: none;
-    -webkit-animation: circle-rotation 3s linear infinite;
-            animation: circle-rotation 3s linear infinite; }
-  .planet.planet-red {
-    background: #8b0000;
-    border-color: #ce0000;
-    box-shadow: 0 0 0px red;
-    -webkit-animation: pulse-red 1s ease-in-out alternate infinite;
-            animation: pulse-red 1s ease-in-out alternate infinite; }
-    .planet.planet-red circle {
-      stroke: #ce0000; }
-  .planet.planet-yellow {
-    background: #b58100;
-    border-color: #f0ab00; }
-    .planet.planet-yellow circle {
-      stroke: #f0ab00; }
-  .planet.planet-blue {
-    background: #008bad;
-    border-color: #00b9e4; }
-    .planet.planet-blue circle {
-      stroke: #00b9e4; }
-  .planet.planet-green {
-    background: #2d7623;
-    border-color: #92d400; }
-    .planet.planet-green circle {
-      stroke: #92d400; }
-
-@-webkit-keyframes pulse-star {
-  to {
-    box-shadow: 0px 0 35px #00b9e4;
-    -webkit-transform: scale3d(0.8, 0.8, 0.8);
-            transform: scale3d(0.8, 0.8, 0.8);
-    background: rgba(255, 255, 255, 0.85); } }
-
-@keyframes pulse-star {
-  to {
-    box-shadow: 0px 0 35px #00b9e4;
-    -webkit-transform: scale3d(0.8, 0.8, 0.8);
-            transform: scale3d(0.8, 0.8, 0.8);
-    background: rgba(255, 255, 255, 0.85); } }
-
-.star {
-  background: #bde4f5;
-  border-radius: 50%;
-  box-shadow: 0 0 20px #fff;
-  width: 8px;
-  height: 8px;
-  -webkit-animation: pulse-star 2s ease alternate infinite;
-          animation: pulse-star 2s ease alternate infinite;
-  margin: 20px;
-  -webkit-transform: scale3d(1.1, 1.1, 1.1);
-          transform: scale3d(1.1, 1.1, 1.1); }
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(-1700%);
+          transform: translateY(-50%) translateX(-1700%);
+  -webkit-animation: move 9s ease;
+          animation: move 9s ease; }

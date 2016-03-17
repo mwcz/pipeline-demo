@@ -44,26 +44,32 @@ body{
 
 // Microservice ==============
 
-.pipeline{
+.microservice{
   width: 60%;
-  overflow: auto; // clearfix
-  margin-bottom: 20px;
+  clear: both;
+  background: tan;
+  position: relative;
 }
 
-// Environment ==============
+// Stages ==============
 
-.environment{
+.stages{
+//  background: yellow;
+  width: 80%;
+//  position: relative;
+//  padding-top: 50px;
+//  transform: translateY(-50%);
+}
+// Stage ==============
+
+.stage{
   background: $color-background-env; //$color-background-env;
   border-radius: 4px;
   float: left;
-  margin: 0 10px;
-  padding: 10px;
-  width: calc(25% - 40px);
-  height: 80px;
+  margin: 40px 10px 0px 10px;
+  width: calc(33.3% - 20px);
+  height: 50px;
   position: relative;
-//  padding: 20px;
-//  width: calc(25% - 44px);
-//  height: calc(45% - 44px);
   &:after{
     content: "";
     background-color: $color-background-env;
@@ -75,108 +81,44 @@ body{
     top: 50%;
     transform: translateY(-50%);
   }
-  &.environment-lg{
-    margin-bottom: 0px;
-    //    height: calc(55% - 44px);
-    //    width: calc(100% - 44px);
+  &.stage-lg{
+    width: calc(20% - 10px);
+    margin-right: 0;
+    margin-top: 0;
+    height: 130px;
     &:after{
       display: none;
     }
   }
   h2{
-    margin: 0 0 10px 0;
+    margin: 0;
+    line-height: 25px;
+//    background: red;
     font-size: $font-size-base;
     font-weight: normal;
     text-transform: uppercase;
+    position: absolute;
+    bottom: -25px;
+//    left: 5px;
   }
 }
 
 // Microservice ==============
 
-.microservice{
+@keyframes move{
+  to{
+    transform: translateY(-50%) translateX(140%) ;
+  }
+}
+
+.commit{
   background: $color-violet;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-}
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-1700%);
+  animation: move 9s ease;
 
-// Planets ==============
-
-@keyframes circle-rotation{
-  to{
-    stroke-dasharray: 100 100;
-  }
-}
-
-@keyframes pulse-red{
-  to{
-    box-shadow: 0 0 100px $color-blue;
-  }
-}
-
-.planet{
-  transform: rotate(-.25turn) scale(.4);
-  background: $color-teal-dark;
-  border-radius: 50%;
-  border: 8px solid $color-teal;
-  circle{
-    // We can add this as attributes on the svg if needed
-    stroke: $color-teal;
-    stroke-width:32;
-    stroke-dasharray: 0 100;
-    fill:none;
-    animation: circle-rotation 3s linear infinite;
-  }
-  &.planet-red{
-    background: $color-red-dark;
-    border-color: $color-red;
-    box-shadow: 0 0 0px red;
-    animation: pulse-red 1s ease-in-out alternate infinite;
-    circle{
-      stroke: $color-red;
-    }
-  }
-  &.planet-yellow{
-    background: $color-yellow-dark;
-    border-color: $color-yellow;
-    circle{
-      stroke: $color-yellow;
-    }
-  }
-  &.planet-blue{
-    background: $color-blue-dark;
-    border-color: $color-blue;
-    circle{
-      stroke: $color-blue;
-    }
-  }
-  &.planet-green{
-    background: $color-green-dark;
-    border-color: $color-green;
-    circle{
-      stroke: $color-green;
-    }
-  }
-}
-
-
-// stars ==============
-
-@keyframes pulse-star{
-  to{
-    box-shadow: 0px 0 35px $color-blue;
-    transform: scale3d(.8, .8, .8);
-    background: rgba(255,255,255,.85);
-  }
-}
-
-.star{
-  background: #bde4f5;
-  border-radius: 50%;
-  box-shadow: 0 0 20px #fff;
-  width: 8px;
-  height: 8px;
-  animation: pulse-star 2s ease alternate infinite;
-  margin: 20px;
-  transform: scale3d(1.1, 1.1, 1.1)
 }
