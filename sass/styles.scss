@@ -57,7 +57,7 @@ body{
   align-items: center;
   &:hover{
     transform: scale3d(1.15 , 1.15 , 1.15);
-    filter: drop-shadow(0 0 10px $color-blue);
+//    filter: drop-shadow(0 0 10px $color-blue);
     z-index: 10;
   }
   h1{
@@ -132,7 +132,7 @@ body{
   }
   100%{
     filter: opacity(0);
-   transform: translateY(-50%) translateX(-1600%);
+    transform: translateX(-750px);
   }
 }
 @keyframes pulse-red{
@@ -142,13 +142,14 @@ body{
 }
 .commit{
   background-color: $color-violet;
-  border: 2px solid $color-violet-dark;
+  border: 3px solid $color-violet-dark;
   width: 38px;
   height: 38px;
   border-radius: 50%;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateX(55px);
+  z-index: 20;
+  top: 43px;
+  left: 90%;
   .animate &{
     animation: move 9s linear infinite;
     animation-direction: reverse;
@@ -156,12 +157,12 @@ body{
   &.commit-blue{
     background-color: $color-blue;
     border-color: $color-blue-dark;
-    transform: translateY(10px) translateX(55px);
+    transform: translateY(30px);
   }
   &.commit-green{
     background-color: $color-green;
     border-color: $color-green-dark;
-    transform: translateY(-50px) translateX(55px);
+    transform: translateY(-30px);
   }
   &.commit-yellow{
     background-color: $color-yellow;
@@ -171,5 +172,6 @@ body{
     background-color: $color-red;
     border-color: $color-red-dark;
     animation: pulse-red 1s $easeInOutBack alternate infinite;
+    left: 15%;
   }
 }
