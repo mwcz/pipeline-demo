@@ -82,8 +82,8 @@ body {
   .stage:after {
     content: "";
     background-color: #002a42;
-    -webkit-mask-image: url(https://dl.dropboxusercontent.com/u/4371641/link.svg);
-            mask-image: url(https://dl.dropboxusercontent.com/u/4371641/link.svg);
+    -webkit-mask-image: url(https://s3.amazonaws.com/passos/img/link.svg);
+            mask-image: url(https://s3.amazonaws.com/passos/img/link.svg);
     width: 20px;
     height: 26px;
     position: absolute;
