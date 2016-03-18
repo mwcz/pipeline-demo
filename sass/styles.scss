@@ -69,6 +69,10 @@ body{
     line-height: 25px;
     color: #fff;
     font-weight: $font-weight-bold;
+    span{
+      font-weight: $font-weight-light;
+      color: rgba(255,255,255,0.7);
+    }
   }
 }
 
@@ -82,7 +86,7 @@ body{
 
 .stage{
   flex: 1 0 10%;
-  background: $color-background-env; //$color-background-env;
+  background-color: $color-background-env;
   border-radius: 2px;
   margin: 0px 10px 10px 10px;
   height: 50px;
@@ -102,6 +106,9 @@ body{
     margin-right: 0;
     margin-top: 0;
     height: 130px;
+    background-color: red;
+    background-image:
+    linear-gradient(to left, $color-background 0%, $color-background-env 80%);
     &:after{
       display: none;
     }
@@ -120,8 +127,12 @@ body{
 // Microservice ==============
 
 @keyframes move{
-  to{
-   transform: translateY(-50%) translateX(-1500%) ;
+  90%{
+    filter: opacity(1);
+  }
+  100%{
+    filter: opacity(0);
+   transform: translateY(-50%) translateX(-1600%);
   }
 }
 @keyframes pulse-red{
@@ -129,7 +140,6 @@ body{
     box-shadow: 0 0 10px $color-blue;
   }
 }
-
 .commit{
   background-color: $color-violet;
   border: 2px solid $color-violet-dark;
@@ -140,7 +150,7 @@ body{
   top: 50%;
   transform: translateY(-50%) translateX(55px);
   .animate &{
-    animation: move 9s ease infinite;
+    animation: move 9s linear infinite;
     animation-direction: reverse;
   }
   &.commit-blue{
@@ -160,6 +170,6 @@ body{
   &.commit-red{
     background-color: $color-red;
     border-color: $color-red-dark;
-    animation: pulse-red 1s ease-in-out alternate infinite;
+    animation: pulse-red 1s $easeInOutBack alternate infinite;
   }
 }
