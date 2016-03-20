@@ -30,7 +30,12 @@ html{
 }
 
 body{
-  background: $color-background;
+  background:
+  linear-gradient(to right,$color-background 60%, transparent),
+  linear-gradient($color-background 18px, transparent 18px) 0 -2px,
+  linear-gradient(90deg,  $color-background 18px, transparent 0px) -2px 0;
+  background-color: darken($color-blue-dark, 17%);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
   color: $color-text;
   font-family: 'Open Sans', sans-serif;
   font-weight: $font-weight-normal;
@@ -61,7 +66,6 @@ body{
   position: relative;
   display: flex;
   align-items: center;
-//  filter: drop-shadow(-1px 0px 1px #000);
   &:hover{
     transform: scale3d(1.15 , 1.15 , 1.15);
     z-index: 10;
@@ -114,7 +118,7 @@ body{
     margin-top: 0;
     height: 130px;
     background-image:
-    linear-gradient(to left, $color-background 0%, $color-background-env 80%);
+    linear-gradient(to left, $color-background 0%, transparent 80%);
     &:after{
       display: none;
     }
