@@ -3,9 +3,9 @@ html {
   height: 100%; }
 
 body {
-  background: -webkit-linear-gradient(left, #002235 60%, transparent), -webkit-linear-gradient(#002235 18px, transparent 18px) 0 -2px, -webkit-linear-gradient(left, #002235 18px, transparent 0px) -2px 0;
-  background: linear-gradient(to right, #002235 60%, transparent), linear-gradient(#002235 18px, transparent 18px) 0 -2px, linear-gradient(90deg, #002235 18px, transparent 0px) -2px 0;
-  background-color: #004556;
+  background: -webkit-linear-gradient(left, #002235 70%, transparent), -webkit-linear-gradient(#002235 18px, transparent 18px) 0 -2px, -webkit-linear-gradient(left, #002235 18px, transparent 0px) -2px 0;
+  background: linear-gradient(to right, #002235 70%, transparent), linear-gradient(#002235 18px, transparent 18px) 0 -2px, linear-gradient(90deg, #002235 18px, transparent 0px) -2px 0;
+  background-color: #003947;
   background-size: 100% 100%, 20px 20px, 20px 20px;
   color: #7cdbf3;
   font-family: 'Open Sans', sans-serif;
@@ -30,6 +30,8 @@ body {
     .container:hover .microservice:hover {
       -webkit-filter: blur(0px);
               filter: blur(0px); }
+      .container:hover .microservice:hover .stage-lg h2 {
+        display: block; }
 
 .microservice {
   cursor: pointer;
@@ -52,6 +54,8 @@ body {
     -webkit-transform: scale3d(1.15, 1.15, 1.15);
             transform: scale3d(1.15, 1.15, 1.15);
     z-index: 10; }
+  .microservice:last-of-type .stage-lg h2 {
+    display: block; }
   .microservice h1 {
     position: absolute;
     top: 15px;
@@ -100,6 +104,8 @@ body {
     height: 130px;
     background-image: -webkit-linear-gradient(right, #002235 0%, transparent 80%);
     background-image: linear-gradient(to left, #002235 0%, transparent 80%); }
+    .stage.stage-lg h2 {
+      display: none; }
     .stage.stage-lg:after {
       display: none; }
   .stage h2 {
