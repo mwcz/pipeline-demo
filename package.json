@@ -1,5 +1,5 @@
 {
-  "name": "Demo 2016",
+  "name": "demo-2016",
   "version": "1.0.0",
   "description": "Pipeline dashboard",
   "main": "Gulpfile.js",
