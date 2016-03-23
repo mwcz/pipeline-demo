@@ -24,13 +24,16 @@ body {
 
 .container {
   width: 60%; }
-  .container:hover .microservice {
+  .container:hover .microservice,
+  .container:hover canvas {
     -webkit-filter: blur(5px) opacity(0.6);
             filter: blur(5px) opacity(0.6); }
-    .container:hover .microservice:hover {
+    .container:hover .microservice:hover,
+    .container:hover canvas:hover {
       -webkit-filter: blur(0px);
               filter: blur(0px); }
-      .container:hover .microservice:hover .stage-lg h2 {
+      .container:hover .microservice:hover .stage-lg h2,
+      .container:hover canvas:hover .stage-lg h2 {
         display: block; }
 
 .microservice {
@@ -179,3 +182,15 @@ body {
     -webkit-animation: pulse-red 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) alternate infinite;
             animation: pulse-red 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) alternate infinite;
     left: 15%; }
+
+#traffic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; }
+
+.coord-display {
+  position: absolute;
+  bottom: 0;
+  left: 48%;
+  font-family: monospace; }

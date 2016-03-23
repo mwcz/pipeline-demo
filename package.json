@@ -14,5 +14,8 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-sass": "^2.1.1",
     "normalize.css": "^3.0.3"
+  },
+  "dependencies": {
+    "three": "^0.75.0"
   }
 }

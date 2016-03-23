@@ -1,0 +1,9 @@
+{
+    "libs": [ "browser", "ecma5" ],
+    "loadEagerly": [
+        "node_modules/three/three.js"
+    ],
+    "plugins": {
+        "node": {}
+    }
+}

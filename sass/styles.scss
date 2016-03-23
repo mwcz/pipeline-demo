@@ -48,7 +48,8 @@ body{
 
 .container{
   width: 60%;
-  &:hover .microservice{
+  &:hover .microservice,
+  &:hover canvas {
     filter: blur(5px) opacity(.6);
     &:hover{
       filter: blur(0px);
@@ -194,4 +195,19 @@ body{
     animation: pulse-red 1s $easeInOutBack alternate infinite;
     left: 15%;
   }
+}
+
+// WebGL Canvas ==============
+
+#traffic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+.coord-display {
+    position: absolute;
+    bottom: 0;
+    left: 48%;
+    font-family: monospace;
 }
