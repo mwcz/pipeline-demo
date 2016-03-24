@@ -112,7 +112,7 @@ function initParticles(particles) {
         particleCount: 2000,
     });
 
-    setInterval( function() { particleGroup.mesh.position.copy( getInitialPosition() ); }, 10);
+    setInterval( function() { particleGroup.mesh.position.copy( getInitialPosition() ); particleGroup.mesh.position.z = 1; }, 10);
 
     particleGroup.addEmitter( emitter );
     scene.add( particleGroup.mesh );
