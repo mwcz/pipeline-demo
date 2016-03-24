@@ -1,9 +1,9 @@
 var camera;
 var scene;
 var renderer;
-var mesh;
 var clock;
 var timescale;
+var particles = {};
 
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -52,14 +52,6 @@ function init() {
 
     scene = new THREE.Scene();
 
-    var geometry = new THREE.TorusKnotGeometry( 100, 30, 200, 16 );
-    var material = new THREE.MeshNormalMaterial();
-
-    mesh = new THREE.Mesh( geometry, material );
-    mesh.position.z = -1000;
-
-    scene.add( mesh );
-
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
@@ -73,17 +65,68 @@ function init() {
 
     //
 
+    initParticles(particles);
+
     window.addEventListener( 'resize', onWindowResize, false );
     window.addEventListener( 'mousemove', onMouseMove, false );
     window.addEventListener( 'click', onClick, false );
 
-    // setInitialPosition(mesh);
-    setTimeout(_=>setInitialPosition(mesh), 10);
+}
+
+function initParticles(particles) {
+    particleGroup = new SPE.Group({
+        maxParticleCount: 2000,
+        texture: {
+            value: THREE.ImageUtils.loadTexture('./img/traffic-dot.png')
+        }
+    });
+
+    emitter = new SPE.Emitter({
+        maxAge: {
+            value: 4
+        },
+        position: {
+            value: new THREE.Vector3(0, 0, 0),
+            spread: new THREE.Vector3( 0, 0, 0 )
+        },
+
+        // acceleration: {
+        //     value: new THREE.Vector3(0, -100, 0),
+        //     spread: new THREE.Vector3( 100, 0, 10 )
+        // },
+
+        velocity: {
+            value: new THREE.Vector3(0, 250, 0),
+            spread: new THREE.Vector3(100, 70.5, 0),
+            randomise: true,
+        },
+
+        color: {
+            value: [ new THREE.Color(0x92d400), new THREE.Color(0x7cdbf3), new THREE.Color(0xf0ab00) ]
+        },
+
+        size: {
+            value: 100
+        },
+
+        particleCount: 2000,
+    });
+
+    setInterval( function() { particleGroup.mesh.position.copy( getInitialPosition() ); }, 10);
+
+    particleGroup.addEmitter( emitter );
+    scene.add( particleGroup.mesh );
 }
 
 function onClick(evt) {
     var coords = toWorldCoords( new THREE.Vector2(evt.clientX, evt.clientY) );
-    pinToFrustum(mesh, coords);
+    emitter.velocity.value.copy(coords.sub(particleGroup.mesh.position));
+    // pinToFrustum(particleGroup.mesh, coords);
+}
+function getInitialPosition() {
+    var coords2d =  new THREE.Vector2( width * 0.77, height * 0.88 );
+    var coords3d = toWorldCoords(coords2d);
+    return coords3d;
 }
 
 function pinToFrustum(mesh, coords) {
@@ -107,16 +150,8 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
-    setInitialPosition(mesh);
-
     renderer.setSize( window.innerWidth, window.innerHeight );
 
-}
-
-function setInitialPosition(mesh) {
-    var coords2d =  new THREE.Vector2( width * 0.74, height * 0.5 );
-    var coords3d = toWorldCoords(coords2d);
-    pinToFrustum(mesh, coords3d);
 }
 
 function animate() {
@@ -125,8 +160,7 @@ function animate() {
 
     timescale = clock.getDelta();
 
-    mesh.rotation.x += 0.05 * timescale;
-    mesh.rotation.y += 0.1 * timescale;
+    particleGroup.tick(timescale);
 
     renderer.render( scene, camera );
 
