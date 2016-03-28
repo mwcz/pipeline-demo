@@ -53,10 +53,6 @@ body {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center; }
-  .microservice:hover {
-    -webkit-transform: scale3d(1.15, 1.15, 1.15);
-            transform: scale3d(1.15, 1.15, 1.15);
-    z-index: 10; }
   .microservice:last-of-type .stage-lg h2 {
     display: block; }
   .microservice h1 {

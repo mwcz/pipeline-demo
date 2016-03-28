@@ -71,8 +71,8 @@ body{
   display: flex;
   align-items: center;
   &:hover{
-    transform: scale3d(1.15 , 1.15 , 1.15);
-    z-index: 10;
+    // transform: scale3d(1.15 , 1.15 , 1.15);
+    // z-index: 10;
 
   }
   &:last-of-type .stage-lg h2{
