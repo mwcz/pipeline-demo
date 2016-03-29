@@ -124,7 +124,7 @@ function initParticles(particles) {
             value: [65,65,65,65],
         },
 
-        particleCount: 100,
+        particleCount: 80,
     });
 
     setInterval( function() { particleGroup.mesh.position.copy( getInitialPosition() ); particleGroup.mesh.position.z = 1; }, 10);
@@ -142,9 +142,9 @@ function centerPoint(el) {
 }
 
 function onClick(evt) {
-    var coords_fixed =  toWorldCoords(new THREE.Vector2( 0, 0 ));
+    var coords_fixed =  toWorldCoords(new THREE.Vector2( width, 0, 1 ));
     var coords = toWorldCoords( new THREE.Vector2(evt.clientX, evt.clientY) );
-    emitter.velocity.value.copy(coords_fixed);
+    emitter.velocity.value.copy( coords_fixed );
     emitter.position.value.copy(coords.sub(particleGroup.mesh.position));
 
     emitter.color.value[0] = new THREE.Color( getBackgroundColor( evt.target ) );
