@@ -20,7 +20,21 @@
    inkscape:export-xdpi="101.32053"
    inkscape:export-ydpi="101.32053">
   <defs
-     id="defs4" />
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4542"
+       x="-0.366"
+       width="1.732"
+       y="-0.366"
+       height="1.732">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="14.4875"
+         id="feGaussianBlur4544" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#000000"
@@ -60,6 +74,15 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-235.22999,-521.87791)">
+    <circle
+       r="47.5"
+       cy="635.57648"
+       cx="348.92856"
+       id="circle4164"
+       style="opacity:1;fill:#ffffff;fill-opacity:0.10659899;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4542)"
+       transform="matrix(1.3820174,0,0,1.3820174,-133.29678,-242.80127)"
+       inkscape:export-xdpi="101.32053"
+       inkscape:export-ydpi="101.32053" />
     <circle
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4136"

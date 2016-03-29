@@ -6,6 +6,12 @@ var timescale;
 var stats;
 var particles = {};
 
+var maxParticleCount = 5000;
+var ALIVE = 1;
+var DEAD = 1;
+var particleGeometry;
+var internet_traffic_source = document.querySelector('.internet-traffic-source');
+
 var width = window.innerWidth;
 var height = window.innerHeight;
 var widthHalf = width / 2, heightHalf = height / 2;
@@ -46,15 +52,25 @@ animate();
 
 function init() {
 
+    // camera
+
     camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
     camera.position.z = 1000;
 
+    // clock
+
     clock = new THREE.Clock();
+
+    // stats
+
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.bottom = '0px';
     stats.domElement.style.right = '0px';
+    stats.domElement.style.zIndex = 100;
     document.body.appendChild( stats.domElement );
+
+    // scene and renderer
 
     scene = new THREE.Scene();
 
@@ -80,57 +96,78 @@ function init() {
 }
 
 function initParticles(particles) {
-    particleGroup = new SPE.Group({
-        maxParticleCount: 1000,
-        valueOverLifetimeLength: 4,
-        transparent: true,
-        texture: {
-            value: THREE.ImageUtils.loadTexture('./img/traffic-dot.png')
-        },
+    uniforms = {
+        color:     { type: "c", value: new THREE.Color( 0xffffff ) },
+        texture:   { type: "t", value: new THREE.TextureLoader().load('./img/traffic-dot.png') }
+    };
+    var shaderMaterial = new THREE.ShaderMaterial( {
+        uniforms:       uniforms,
+        vertexShader:   document.getElementById( 'vertexshader' ).textContent,
+        fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+        blending:       THREE.AdditiveBlending,
+        depthTest:      false,
+        transparent:    true
     });
+    var radius = 800;
+    particleGeometry = new THREE.BufferGeometry();
+    var alive = new Float32Array( maxParticleCount );
+    var positions = new Float32Array( maxParticleCount * 3 );
+    var endPositions = new Float32Array( maxParticleCount * 3 );
+    var colors = new Float32Array( maxParticleCount * 3 );
+    var sizes = new Float32Array( maxParticleCount );
+    var color = new THREE.Color();
+    for ( var i = 0, i3 = 0; i < maxParticleCount; i ++, i3 += 3 ) {
+        positions[ i3 + 0 ] = 0;
+        positions[ i3 + 1 ] = 0;
+        positions[ i3 + 2 ] = 1;
+        endPositions[ i3 + 0 ] = 0;
+        endPositions[ i3 + 1 ] = 0;
+        endPositions[ i3 + 2 ] = 1;
+        color.setHSL( i / maxParticleCount, 1.0, 0.5 );
+        colors[ i3 + 0 ] = color.r;
+        colors[ i3 + 1 ] = color.g;
+        colors[ i3 + 2 ] = color.b;
+        sizes[ i ] = 40;
+        alive[i] = 0;
+    }
+    particleGeometry.addAttribute( 'alive', new THREE.BufferAttribute( alive, 1 ) );
+    particleGeometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+    particleGeometry.addAttribute( 'endPosition', new THREE.BufferAttribute( positions, 3 ) );
+    particleGeometry.addAttribute( 'customColor', new THREE.BufferAttribute( colors, 3 ) );
+    particleGeometry.addAttribute( 'size', new THREE.BufferAttribute( sizes, 1 ) );
+    particleSystem = new THREE.Points( particleGeometry, shaderMaterial );
+    scene.add( particleSystem );
+}
 
-    emitter = new SPE.Emitter({
-        direction: -1,
-        maxAge: {
-            value: 1
-        },
-        position: {
-            value: new THREE.Vector3(0, 0, 0),
-            // spread: new THREE.Vector3( 0, 0, 0 ),
-            randomise: true,
-        },
+function findAvailableParticle() {
+    return particleGeometry.attributes.alive.array.indexOf(0);
+}
 
-        // acceleration: {
-        //     value: new THREE.Vector3(0, -100, 0),
-        //     spread: new THREE.Vector3( 100, 0, 10 )
-        // },
+function sendParticle(a, b) {
 
-        opacity: {
-            value: [1, 1, 1, 1]
-        },
+    var start_pos   = toWorldCoords(centerPoint(a));
+    var end_pos     = toWorldCoords(centerPoint(b));
+    var start_color = getBackgroundColor(a);
+    var end_color   = getBackgroundColor(b);
+    var index       = findAvailableParticle();
 
-        velocity: {
-            value: new THREE.Vector3(0, 20, 0),
-            // spread: new THREE.Vector3(0, 0, 0),
-            randomise: true,
-        },
+    // update particle attributes
+    particleSystem.geometry.attributes.position.array[index+0] = start_pos.x;
+    particleSystem.geometry.attributes.position.array[index+1] = start_pos.y;
+    particleSystem.geometry.attributes.position.array[index+2] = 1;
 
-        color: {
-            value: [  new THREE.Color(0xf0ab00), new THREE.Color(0x92d400) ],
-            randomise: true,
-        },
+    particleSystem.geometry.attributes.endPosition.array[index+0] = end_pos.x;
+    particleSystem.geometry.attributes.endPosition.array[index+1] = end_pos.y;
+    particleSystem.geometry.attributes.endPosition.array[index+2] = 1;
 
-        size: {
-            value: [65,65,65,65],
-        },
+    particleSystem.geometry.attributes.alive.array[index] = ALIVE;
+}
 
-        particleCount: 100,
-    });
-
-    setInterval( function() { particleGroup.mesh.position.copy( getInitialPosition() ); particleGroup.mesh.position.z = 1; }, 10);
-
-    particleGroup.addEmitter( emitter );
-    scene.add( particleGroup.mesh );
+function updateParticles() {
+    particleGeometry.attributes.alive.needsUpdate = true;
+    particleGeometry.attributes.position.needsUpdate = true;
+    particleGeometry.attributes.endPosition.needsUpdate = true;
+    particleGeometry.attributes.customColor.needsUpdate = true;
 }
 
 function centerPoint(el) {
@@ -142,13 +179,9 @@ function centerPoint(el) {
 }
 
 function onClick(evt) {
-    var coords_fixed =  toWorldCoords(new THREE.Vector2( 0, 0 ));
-    var coords = toWorldCoords( new THREE.Vector2(evt.clientX, evt.clientY) );
-    emitter.velocity.value.copy(coords_fixed);
-    emitter.position.value.copy(coords.sub(particleGroup.mesh.position));
-
-    emitter.color.value[0] = new THREE.Color( getBackgroundColor( evt.target ) );
-    // pinToFrustum(coords.sub(particleGroup.mesh.position), coords);
+    // var coords_fixed =  toWorldCoords(new THREE.Vector2( 0, 0 ));
+    // var coords = toWorldCoords( new THREE.Vector2(evt.clientX, evt.clientY) );
+    sendParticle( internet_traffic_source, evt.target );
 }
 
 function getBackgroundColor(element) {
@@ -190,12 +223,12 @@ function onWindowResize() {
 
 function animate() {
 
+    updateParticles();
+
     stats.update();
     requestAnimationFrame( animate );
 
     timescale = clock.getDelta();
-
-    particleGroup.tick(timescale);
 
     renderer.render( scene, camera );
 

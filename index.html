@@ -120,9 +120,37 @@
 
     <canvas id="traffic"></canvas>
 
+    <div class="internet-traffic-source"></div>
     <div class="coord-display"></div>
 
   </div><!-- /container -->
+
+  <script type="x-shader/x-vertex" id="vertexshader">
+      attribute float alive;
+      attribute float size;
+      attribute vec3 customColor;
+      varying vec3 vColor;
+      varying float vAlive;
+      void main() {
+          vColor = customColor;
+          vAlive = alive;
+          vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+          gl_PointSize = size * ( 300.0 / -mvPosition.z );
+          gl_Position = projectionMatrix * mvPosition;
+      }
+  </script>
+
+  <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform vec3 color;
+      uniform sampler2D texture;
+      varying vec3 vColor;
+      varying float vAlive;
+      void main() {
+          if ( vAlive == 0.0 ) discard;
+          gl_FragColor = vec4( color * vColor, 1.0 );
+          gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+      }
+  </script>
 
   <script src="node_modules/three/three.js"></script>
   <script src="node_modules/three/examples/js/libs/stats.min.js"></script>

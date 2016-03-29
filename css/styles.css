@@ -190,3 +190,10 @@ body {
   bottom: 0;
   left: 48%;
   font-family: monospace; }
+
+.internet-traffic-source {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 0;
+  height: 0; }
