@@ -1,3 +1,8 @@
+var PARTICLE_DURATION  = 5; // seconds
+var MAX_PARTICLE_COUNT = 5000;
+var ALIVE              = 1;
+var DEAD               = 1;
+
 var camera;
 var scene;
 var renderer;
@@ -6,9 +11,6 @@ var timescale;
 var stats;
 var particles = {};
 
-var maxParticleCount = 5000;
-var ALIVE = 1;
-var DEAD = 1;
 var particleGeometry;
 var internet_traffic_source = document.querySelector('.internet-traffic-source');
 
@@ -97,8 +99,8 @@ function init() {
 
 function initParticles(particles) {
     uniforms = {
-        color:     { type: "c", value: new THREE.Color( 0xffffff ) },
-        texture:   { type: "t", value: new THREE.TextureLoader().load('./img/traffic-dot.png') }
+        texture:   { type: "t", value: new THREE.TextureLoader().load('./img/traffic-dot.png') },
+        TIMER_MAX: { type: "f", value: PARTICLE_DURATION },
     };
     var shaderMaterial = new THREE.ShaderMaterial( {
         uniforms:       uniforms,
@@ -108,33 +110,34 @@ function initParticles(particles) {
         depthTest:      false,
         transparent:    true
     });
-    var radius = 800;
+    var radius       = 800;
     particleGeometry = new THREE.BufferGeometry();
-    var alive = new Float32Array( maxParticleCount );
-    var positions = new Float32Array( maxParticleCount * 3 );
-    var endPositions = new Float32Array( maxParticleCount * 3 );
-    var colors = new Float32Array( maxParticleCount * 3 );
-    var sizes = new Float32Array( maxParticleCount );
-    var color = new THREE.Color();
-    for ( var i = 0, i3 = 0; i < maxParticleCount; i ++, i3 += 3 ) {
+    var alive        = new Float32Array( MAX_PARTICLE_COUNT );
+    var positions    = new Float32Array( MAX_PARTICLE_COUNT * 3 );
+    var endPositions = new Float32Array( MAX_PARTICLE_COUNT * 3 );
+    var startColors  = new Float32Array( MAX_PARTICLE_COUNT * 3 );
+    var endColors    = new Float32Array( MAX_PARTICLE_COUNT * 3 );
+    var sizes        = new Float32Array( MAX_PARTICLE_COUNT );
+    var timer        = new Float32Array( MAX_PARTICLE_COUNT );
+    var color        = new THREE.Color();
+    for ( var i = 0, i3 = 0; i < MAX_PARTICLE_COUNT; i ++, i3 += 3 ) {
         positions[ i3 + 0 ] = 0;
         positions[ i3 + 1 ] = 0;
         positions[ i3 + 2 ] = 1;
         endPositions[ i3 + 0 ] = 0;
         endPositions[ i3 + 1 ] = 0;
         endPositions[ i3 + 2 ] = 1;
-        color.setHSL( i / maxParticleCount, 1.0, 0.5 );
-        colors[ i3 + 0 ] = color.r;
-        colors[ i3 + 1 ] = color.g;
-        colors[ i3 + 2 ] = color.b;
         sizes[ i ] = 40;
         alive[i] = 0;
+        timer[i] = 0;
     }
     particleGeometry.addAttribute( 'alive', new THREE.BufferAttribute( alive, 1 ) );
     particleGeometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
     particleGeometry.addAttribute( 'endPosition', new THREE.BufferAttribute( positions, 3 ) );
-    particleGeometry.addAttribute( 'customColor', new THREE.BufferAttribute( colors, 3 ) );
+    particleGeometry.addAttribute( 'startColor', new THREE.BufferAttribute( startColors, 3 ) );
+    particleGeometry.addAttribute( 'endColor', new THREE.BufferAttribute( endColors, 3 ) );
     particleGeometry.addAttribute( 'size', new THREE.BufferAttribute( sizes, 1 ) );
+    particleGeometry.addAttribute( 'timer', new THREE.BufferAttribute( sizes, 1 ) );
     particleSystem = new THREE.Points( particleGeometry, shaderMaterial );
     scene.add( particleSystem );
 }
@@ -147,8 +150,8 @@ function sendParticle(a, b) {
 
     var start_pos   = toWorldCoords(a);
     var end_pos     = toWorldCoords(b);
-    var start_color = getBackgroundColor(a);
-    var end_color   = getBackgroundColor(b);
+    var start_color = new THREE.Color(getBackgroundColor(a));
+    var end_color   = new THREE.Color(getBackgroundColor(b));
     var i1          = findAvailableParticle();
     var i3          = i1 * 3;
 
@@ -163,6 +166,16 @@ function sendParticle(a, b) {
     particleSystem.geometry.attributes.endPosition.array[i3+1] = end_pos.y;
     particleSystem.geometry.attributes.endPosition.array[i3+2] = 1;
 
+    particleSystem.geometry.attributes.startColor.array[i3+0] = start_color.r;
+    particleSystem.geometry.attributes.startColor.array[i3+1] = start_color.g;
+    particleSystem.geometry.attributes.startColor.array[i3+2] = start_color.b;
+
+    particleSystem.geometry.attributes.endColor.array[i3+0] = end_color.r;
+    particleSystem.geometry.attributes.endColor.array[i3+1] = end_color.g;
+    particleSystem.geometry.attributes.endColor.array[i3+2] = end_color.b;
+
+    particleSystem.geometry.attributes.timer.array[i1] = PARTICLE_DURATION;
+
     particleSystem.geometry.attributes.alive.array[i1] = ALIVE;
 }
 
@@ -170,7 +183,22 @@ function updateParticles() {
     particleGeometry.attributes.alive.needsUpdate = true;
     particleGeometry.attributes.position.needsUpdate = true;
     particleGeometry.attributes.endPosition.needsUpdate = true;
-    particleGeometry.attributes.customColor.needsUpdate = true;
+    particleGeometry.attributes.timer.needsUpdate = true;
+
+    updateParticleTimers();
+}
+
+function updateParticleTimers() {
+    particleGeometry.attributes.timer.array.map(updateParticleTimer);
+}
+
+function updateParticleTimer(v, i, a) {
+    if (v !== 0) {
+        a[i] = v - timescale;
+        if (a[i] === 0) {
+            particleSystem.geometry.attributes.alive.array[i] = DEAD;
+        }
+    }
 }
 
 function eventPoint(evt) {
@@ -195,7 +223,7 @@ function onClick(evt) {
 }
 
 function getBackgroundColor(element) {
-    var color = 'rgb(255, 0, 0)';
+    var color = 'rgb(255, 0, 0)'; // default
     if (element instanceof Element) {
         color = window.getComputedStyle( element ).backgroundColor;
     }
@@ -237,12 +265,13 @@ function onWindowResize() {
 
 function animate() {
 
-    updateParticles();
-
-    stats.update();
     requestAnimationFrame( animate );
 
     timescale = clock.getDelta();
+
+    updateParticles();
+
+    stats.update();
 
     renderer.render( scene, camera );
 
