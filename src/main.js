@@ -145,22 +145,25 @@ function findAvailableParticle() {
 
 function sendParticle(a, b) {
 
-    var start_pos   = toWorldCoords(centerPoint(a));
-    var end_pos     = toWorldCoords(centerPoint(b));
+    var start_pos   = toWorldCoords(a);
+    var end_pos     = toWorldCoords(b);
     var start_color = getBackgroundColor(a);
     var end_color   = getBackgroundColor(b);
-    var index       = findAvailableParticle();
+    var i1          = findAvailableParticle();
+    var i3          = i1 * 3;
+
+    console.log(JSON.stringify({ start_pos, end_pos, start_color, end_color, i1 }, null, 4));
 
     // update particle attributes
-    particleSystem.geometry.attributes.position.array[index+0] = start_pos.x;
-    particleSystem.geometry.attributes.position.array[index+1] = start_pos.y;
-    particleSystem.geometry.attributes.position.array[index+2] = 1;
+    particleSystem.geometry.attributes.position.array[i3+0] = start_pos.x;
+    particleSystem.geometry.attributes.position.array[i3+1] = start_pos.y;
+    particleSystem.geometry.attributes.position.array[i3+2] = 1;
 
-    particleSystem.geometry.attributes.endPosition.array[index+0] = end_pos.x;
-    particleSystem.geometry.attributes.endPosition.array[index+1] = end_pos.y;
-    particleSystem.geometry.attributes.endPosition.array[index+2] = 1;
+    particleSystem.geometry.attributes.endPosition.array[i3+0] = end_pos.x;
+    particleSystem.geometry.attributes.endPosition.array[i3+1] = end_pos.y;
+    particleSystem.geometry.attributes.endPosition.array[i3+2] = 1;
 
-    particleSystem.geometry.attributes.alive.array[index] = ALIVE;
+    particleSystem.geometry.attributes.alive.array[i1] = ALIVE;
 }
 
 function updateParticles() {
@@ -168,6 +171,13 @@ function updateParticles() {
     particleGeometry.attributes.position.needsUpdate = true;
     particleGeometry.attributes.endPosition.needsUpdate = true;
     particleGeometry.attributes.customColor.needsUpdate = true;
+}
+
+function eventPoint(evt) {
+    return {
+        x: evt.clientX,
+        y: evt.clientY,
+    };
 }
 
 function centerPoint(el) {
@@ -181,11 +191,15 @@ function centerPoint(el) {
 function onClick(evt) {
     // var coords_fixed =  toWorldCoords(new THREE.Vector2( 0, 0 ));
     // var coords = toWorldCoords( new THREE.Vector2(evt.clientX, evt.clientY) );
-    sendParticle( internet_traffic_source, evt.target );
+    sendParticle( centerPoint(internet_traffic_source), eventPoint(evt) );
 }
 
 function getBackgroundColor(element) {
-    return window.getComputedStyle( element ).backgroundColor;
+    var color = 'rgb(255, 0, 0)';
+    if (element instanceof Element) {
+        color = window.getComputedStyle( element ).backgroundColor;
+    }
+    return color;
 }
 
 function getInitialPosition() {
