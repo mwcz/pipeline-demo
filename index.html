@@ -149,7 +149,8 @@
           vEndColor    = endColor;
           vTimer       = timer;
           vProgress    = 1.0 - vTimer / TIMER_MAX;
-          vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+          vec3 newPosition = mix( position, endPosition, vProgress );
+          vec4 mvPosition = modelViewMatrix * vec4( newPosition, 1.0 );
           gl_PointSize = size; // * ( 300.0 / -mvPosition.z );
           gl_Position = projectionMatrix * mvPosition;
       }
@@ -167,8 +168,8 @@
 
       void main() {
           if ( vAlive == 0.0 ) discard;
-          vec3 color = mix( vStartColor, vEndColor, vProgress );
-          gl_FragColor = vec4( mix( vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 0.0), vProgress ), 1.0 ) * texture2D( texture, gl_PointCoord );;
+          vec3 mixColor = mix( vStartColor, vEndColor, vProgress );
+          gl_FragColor = vec4( mixColor, 1.0 - vProgress ) * texture2D( texture, gl_PointCoord );;
       }
   </script>
 

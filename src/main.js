@@ -1,7 +1,7 @@
-var PARTICLE_DURATION  = 5; // seconds
+var PARTICLE_DURATION  = 3; // seconds
 var MAX_PARTICLE_COUNT = 5000;
 var ALIVE              = 1;
-var DEAD               = 1;
+var DEAD               = 0;
 
 var camera;
 var scene;
@@ -25,11 +25,13 @@ var coordDisplay = document.querySelector('.coord-display');
  * coordinate into 3D world coordinate space.
  */
 function toWorldCoords(position) {
-    var vector = new THREE.Vector3(position.x, position.y, 1);
-    vector.x = ( vector.x - widthHalf ) / widthHalf;
-    vector.y = ( vector.y - heightHalf ) / -heightHalf;
-    vector.unproject( camera );
-
+    var vector = new THREE.Vector3();
+    if (position) {
+        var vector = new THREE.Vector3(position.x, position.y, 1);
+        vector.x = ( vector.x - widthHalf ) / widthHalf;
+        vector.y = ( vector.y - heightHalf ) / -heightHalf;
+        vector.unproject( camera );
+    }
     return vector;
 }
 
@@ -119,7 +121,6 @@ function initParticles(particles) {
     var endColors    = new Float32Array( MAX_PARTICLE_COUNT * 3 );
     var sizes        = new Float32Array( MAX_PARTICLE_COUNT );
     var timer        = new Float32Array( MAX_PARTICLE_COUNT );
-    var color        = new THREE.Color();
     for ( var i = 0, i3 = 0; i < MAX_PARTICLE_COUNT; i ++, i3 += 3 ) {
         positions[ i3 + 0 ] = 0;
         positions[ i3 + 1 ] = 0;
@@ -133,7 +134,7 @@ function initParticles(particles) {
     }
     particleGeometry.addAttribute( 'alive', new THREE.BufferAttribute( alive, 1 ) );
     particleGeometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
-    particleGeometry.addAttribute( 'endPosition', new THREE.BufferAttribute( positions, 3 ) );
+    particleGeometry.addAttribute( 'endPosition', new THREE.BufferAttribute( endPositions, 3 ) );
     particleGeometry.addAttribute( 'startColor', new THREE.BufferAttribute( startColors, 3 ) );
     particleGeometry.addAttribute( 'endColor', new THREE.BufferAttribute( endColors, 3 ) );
     particleGeometry.addAttribute( 'size', new THREE.BufferAttribute( sizes, 1 ) );
@@ -189,13 +190,14 @@ function updateParticles() {
 }
 
 function updateParticleTimers() {
-    particleGeometry.attributes.timer.array.map(updateParticleTimer);
+    particleGeometry.attributes.timer.array.forEach(updateParticleTimer);
 }
 
 function updateParticleTimer(v, i, a) {
     if (v !== 0) {
         a[i] = v - timescale;
-        if (a[i] === 0) {
+        if (a[i] <= 0) {
+            a[i] = 0;
             particleSystem.geometry.attributes.alive.array[i] = DEAD;
         }
     }
