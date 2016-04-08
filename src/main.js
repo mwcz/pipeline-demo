@@ -11,6 +11,10 @@ var timescale;
 var stats;
 var particles = {};
 
+var mouseDown = false;
+var firehoseId;
+var hoverElement;
+
 var particleGeometry;
 var internet_traffic_source = document.querySelector('.internet-traffic-source');
 
@@ -94,8 +98,11 @@ function init() {
     initParticles(particles);
 
     window.addEventListener( 'resize', onWindowResize, false );
-    window.addEventListener( 'mousemove', onMouseMove, false );
     window.addEventListener( 'click', onClick, false );
+
+    window.addEventListener( 'mouseup', onMouseUp, false );
+    window.addEventListener( 'mousedown', onMouseDown, false );
+    window.addEventListener( 'mousemove', onMouseMove, false );
 
 }
 
@@ -147,16 +154,16 @@ function findAvailableParticle() {
     return particleGeometry.attributes.alive.array.indexOf(0);
 }
 
-function sendParticle(a, b) {
+function sendParticle(data) {
 
-    var start_pos   = toWorldCoords(a);
-    var end_pos     = toWorldCoords(b);
-    var start_color = new THREE.Color(getBackgroundColor(a));
-    var end_color   = new THREE.Color(getBackgroundColor(b));
+    var start_pos   = toWorldCoords(data.from);
+    var end_pos     = toWorldCoords(data.to);
+    var start_color = data.fromColor;
+    var end_color   = data.toColor;
     var i1          = findAvailableParticle();
     var i3          = i1 * 3;
 
-    console.log(JSON.stringify({ start_pos, end_pos, start_color, end_color, i1 }, null, 4));
+    // console.log(JSON.stringify({ start_pos, end_pos, start_color, end_color, i1 }, null, 4));
 
     // update particle attributes
     particleSystem.geometry.attributes.position.array[i3+0] = start_pos.x;
@@ -185,6 +192,8 @@ function updateParticles() {
     particleGeometry.attributes.position.needsUpdate = true;
     particleGeometry.attributes.endPosition.needsUpdate = true;
     particleGeometry.attributes.timer.needsUpdate = true;
+    particleGeometry.attributes.startColor.needsUpdate = true;
+    particleGeometry.attributes.endColor.needsUpdate = true;
 
     updateParticleTimers();
 }
@@ -219,17 +228,20 @@ function centerPoint(el) {
 }
 
 function onClick(evt) {
-    // var coords_fixed =  toWorldCoords(new THREE.Vector2( 0, 0 ));
-    // var coords = toWorldCoords( new THREE.Vector2(evt.clientX, evt.clientY) );
-    sendParticle( centerPoint(internet_traffic_source), eventPoint(evt) );
+    sendParticle({ 
+        from      : centerPoint(internet_traffic_source),
+        to        : eventPoint(evt),
+        fromColor : getColor(), // TODO: set correct color here 
+        toColor   : getColor( evt.target ),
+    });
 }
 
-function getBackgroundColor(element) {
-    var color = 'rgb(255, 0, 0)'; // default
+function getColor(element) {
+    var color = 'rgb(0, 0, 255)'; // default color
     if (element instanceof Element) {
         color = window.getComputedStyle( element ).backgroundColor;
     }
-    return color;
+    return new THREE.Color(color);
 }
 
 function getInitialPosition() {
@@ -254,6 +266,27 @@ function onMouseMove(evt) {
     coordDisplay.innerHTML = '<b>COORDS</b><br>' +
         '<b>2D:</b> ' + coords2d.toArray().slice(0,2) + '<br>' +
         '<b>3D:</b> ' + coords3d.toArray().map(Math.floor);
+    hoverElement = evt.target;
+}
+
+function onMouseUp(evt) {
+    clearInterval(firehoseId);
+}
+
+function onMouseDown(evt) {
+    mouseDown = true;
+    firehoseId = setInterval(function() {
+        sendParticle({ 
+            from      : centerPoint(internet_traffic_source),
+            to        : eventPoint(evt),
+            fromColor : getColor(), // TODO: set correct color here 
+            toColor   : getColor( getHoverElement() ),
+        })
+    }, 100);
+}
+
+function getHoverElement() {
+    return hoverElement;
 }
 
 function onWindowResize() {
