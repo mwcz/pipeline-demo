@@ -276,10 +276,10 @@ function onMouseUp(evt) {
 function onMouseDown(evt) {
     mouseDown = true;
     firehoseId = setInterval(function() {
-        sendParticle({ 
+        sendParticle({
             from      : centerPoint(internet_traffic_source),
             to        : eventPoint(evt),
-            fromColor : getColor(), // TODO: set correct color here 
+            fromColor : getColor(),
             toColor   : getColor( getHoverElement() ),
         })
     }, 100);
@@ -311,3 +311,23 @@ function animate() {
     renderer.render( scene, camera );
 
 }
+
+// take a {from:0, to:1} JSON object from the remote server and map it to
+// {from:Element,to:Element,fromColor:white,toColor:black}
+function dataMap(data) {
+    var from = document.querySelector('[id="' + data.from + '"]');
+    var to   = document.querySelector('[id="' + data.to + '"]');
+    return {
+        from      : centerPoint(from),
+        to        : centerPoint(to),
+        fromColor : getColor(from),
+        toColor   : getColor(to),
+    };
+}
+
+// set up websocket
+var socket = new WebSocket("ws://localhost:3001");
+socket.onmessage = function onMessage(event) {
+    var data = JSON.parse(event.data);
+    data.map(dataMap).forEach(sendParticle);
+};
