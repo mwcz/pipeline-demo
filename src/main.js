@@ -161,8 +161,6 @@ function sendParticle(data) {
     var i1          = findAvailableParticle();
     var i3          = i1 * 3;
 
-    // console.log(JSON.stringify({ start_pos, end_pos, start_color, end_color, i1 }, null, 4));
-
     // update particle attributes
     particleSystem.geometry.attributes.position.array[i3+0] = start_pos.x;
     particleSystem.geometry.attributes.position.array[i3+1] = start_pos.y;
@@ -293,11 +291,17 @@ function onWindowResize() {
 
 }
 
+function moveInternet() {
+    internet_traffic_source.style.top = Math.random() * height + 'px';
+}
+
 function animate() {
 
     requestAnimationFrame( animate );
 
     timescale = clock.getDelta();
+
+    moveInternet();
 
     updateParticles();
 
@@ -321,7 +325,7 @@ function dataMap(data) {
 }
 
 // set up websocket
-var socket = new WebSocket("ws://localhost:3001");
+var socket = new WebSocket("ws://localhost:3004");
 socket.onmessage = function onMessage(event) {
     var data = JSON.parse(event.data);
     data.map(dataMap).forEach(sendParticle);
