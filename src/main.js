@@ -2,6 +2,7 @@ var PARTICLE_DURATION  = 3; // seconds
 var MAX_PARTICLE_COUNT = 5000;
 var ALIVE              = 1;
 var DEAD               = 0;
+var particle_count     = 0;
 
 var camera;
 var scene;
@@ -183,6 +184,7 @@ function sendParticle(data) {
     particleSystem.geometry.attributes.timer.array[i1] = PARTICLE_DURATION;
 
     particleSystem.geometry.attributes.alive.array[i1] = ALIVE;
+    particle_count += 1;
 }
 
 function updateParticles() {
@@ -206,6 +208,7 @@ function updateParticleTimer(v, i, a) {
         if (a[i] <= 0) {
             a[i] = 0;
             particleSystem.geometry.attributes.alive.array[i] = DEAD;
+            particle_count -= 1;
         }
     }
 }
