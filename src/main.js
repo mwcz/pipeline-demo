@@ -110,6 +110,7 @@ function initParticles(particles) {
     uniforms = {
         texture:   { type: "t", value: new THREE.TextureLoader().load('./img/traffic-dot.png') },
         TIMER_MAX: { type: "f", value: PARTICLE_DURATION },
+        size:      { type: "f", value: 14 },
     };
     var shaderMaterial = new THREE.ShaderMaterial( {
         uniforms:       uniforms,
@@ -126,7 +127,6 @@ function initParticles(particles) {
     var endPositions = new Float32Array( MAX_PARTICLE_COUNT * 3 );
     var startColors  = new Float32Array( MAX_PARTICLE_COUNT * 3 );
     var endColors    = new Float32Array( MAX_PARTICLE_COUNT * 3 );
-    var sizes        = new Float32Array( MAX_PARTICLE_COUNT );
     var timer        = new Float32Array( MAX_PARTICLE_COUNT );
     for ( var i = 0, i3 = 0; i < MAX_PARTICLE_COUNT; i ++, i3 += 3 ) {
         positions[ i3 + 0 ] = 0;
@@ -135,7 +135,6 @@ function initParticles(particles) {
         endPositions[ i3 + 0 ] = 0;
         endPositions[ i3 + 1 ] = 0;
         endPositions[ i3 + 2 ] = 1;
-        sizes[ i ] = 40;
         alive[i] = 0;
         timer[i] = 0;
     }
@@ -144,8 +143,7 @@ function initParticles(particles) {
     particleGeometry.addAttribute( 'endPosition', new THREE.BufferAttribute( endPositions, 3 ) );
     particleGeometry.addAttribute( 'startColor', new THREE.BufferAttribute( startColors, 3 ) );
     particleGeometry.addAttribute( 'endColor', new THREE.BufferAttribute( endColors, 3 ) );
-    particleGeometry.addAttribute( 'size', new THREE.BufferAttribute( sizes, 1 ) );
-    particleGeometry.addAttribute( 'timer', new THREE.BufferAttribute( sizes, 1 ) );
+    particleGeometry.addAttribute( 'timer', new THREE.BufferAttribute( timer, 1 ) );
     particleSystem = new THREE.Points( particleGeometry, shaderMaterial );
     scene.add( particleSystem );
 }
