@@ -128,6 +128,8 @@
   <script type="x-shader/x-vertex" id="vertexshader">
       // increase FLASHPOINT to make the flash happen later
       #define FLASHPOINT 10.0
+      #define FLASHPOINT_STRENGTH 1.5
+      #define PI 3.14159
       uniform float TIMER_MAX;
       uniform float size;
 
@@ -150,8 +152,10 @@
           vMixColor   = mix( startColor, endColor, vProgress );
           vFlashPoint = max( 0.0, (1.0 + FLASHPOINT) * vProgress - FLASHPOINT ); // https://www.desmos.com/calculator/nymymapyel
           vec3 newPosition = mix( position, endPosition, vProgress );
+          float yDist = abs(endPosition.y - position.y);
+          newPosition.x += yDist / 2.0 * sin( PI * vProgress );
           vec4 mvPosition = modelViewMatrix * vec4( newPosition, 1.0 );
-          gl_PointSize = size * (1.0 + vFlashPoint);
+          gl_PointSize = size * (1.0 + vFlashPoint * FLASHPOINT_STRENGTH);
           gl_Position = projectionMatrix * mvPosition;
       }
   </script>
