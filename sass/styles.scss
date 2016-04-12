@@ -48,16 +48,6 @@ body{
 
 .container{
   width: 60%;
-  &:hover .microservice,
-  &:hover canvas {
-    filter: blur(5px) opacity(.6);
-    &:hover{
-      filter: blur(0px);
-      .stage-lg h2{
-        display: block;
-      }
-    }
-  }
 }
 
 // Microservice ==============
