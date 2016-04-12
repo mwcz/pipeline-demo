@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64.176529mm"
+   height="64.176529mm"
+   viewBox="0 0 227.39715 227.39715"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="traffic-dot.svg"
+   inkscape:export-filename="/home/mwc/workspace/pipeline-demo/img/traffic-dot.png"
+   inkscape:export-xdpi="101.32053"
+   inkscape:export-ydpi="101.32053">
+  <defs
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4542"
+       x="-0.366"
+       width="1.732"
+       y="-0.366"
+       height="1.732">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="14.4875"
+         id="feGaussianBlur4544" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.0937063"
+     inkscape:cx="68.442622"
+     inkscape:cy="86.982999"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-235.22999,-521.87791)">
+    <circle
+       r="47.5"
+       cy="635.57648"
+       cx="348.92856"
+       id="circle4164"
+       style="opacity:1;fill:#ffffff;fill-opacity:0.10659899;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4542)"
+       transform="matrix(1.3820174,0,0,1.3820174,-133.29678,-242.80127)"
+       inkscape:export-xdpi="101.32053"
+       inkscape:export-ydpi="101.32053" />
+    <circle
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4136"
+       cx="348.92856"
+       cy="635.57648"
+       r="47.5"
+       inkscape:export-xdpi="101.32053"
+       inkscape:export-ydpi="101.32053" />
+  </g>
+</svg>
