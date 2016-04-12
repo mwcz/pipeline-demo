@@ -23,8 +23,6 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 var widthHalf = width / 2, heightHalf = height / 2;
 
-var coordDisplay = document.querySelector('.coord-display');
-
 /**
  * Given a screen position (THREE.Vector2), convert that screen-space
  * coordinate into 3D world coordinate space.
@@ -262,11 +260,6 @@ function pinToFrustum(mesh, coords) {
 }
 
 function onMouseMove(evt) {
-    var coords2d = new THREE.Vector2(evt.clientX, evt.clientY);
-    var coords3d = toWorldCoords(coords2d);
-    coordDisplay.innerHTML = '<b>COORDS</b><br>' +
-        '<b>2D:</b> ' + coords2d.toArray().slice(0,2) + '<br>' +
-        '<b>3D:</b> ' + coords3d.toArray().map(Math.floor);
     hoverElement = evt.target;
 }
 
