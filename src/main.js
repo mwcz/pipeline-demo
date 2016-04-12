@@ -117,7 +117,8 @@ function initParticles(particles) {
         fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
         blending:       THREE.AdditiveBlending,
         depthTest:      false,
-        transparent:    true
+        transparent:    true,
+        alphaTest: 0.5,
     });
     var radius       = 800;
     particleGeometry = new THREE.BufferGeometry();
